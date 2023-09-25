@@ -2,112 +2,96 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter layout demo'),
-        ),
-        body: Column(
-          children: [
-            titleSection, // Add the titleSection widget here
-            buttonSection,
-            textSection
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            title: const Text('Flutter layout demo'),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                // imageSection(),
+                // titleSection(),
+                // buttonSection,
+                // textSection,
+                // emailTextInputSection,
+                // passwordTextInputSection,
+                textInputSection,
+                saveButtonSection,
+              ],
+            ),
+          )),
     );
   }
 }
 
-Widget titleSection = Container(
-  padding: const EdgeInsets.all(32),
-  child: Row(
-    children: [
-      Expanded(
-        /*1*/
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /*2*/
-            Container(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: const Text(
-                'Oeschinen Lake Campground',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Text(
-              'Kandersteg, Switzerland',
-              style: TextStyle(
-                color: Colors.grey[500],
-              ),
-            ),
-          ],
-        ),
-      ),
-      /*3*/
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      const Text('41'),
-    ],
-  ),
-);
-
-Column _buildButtonColumn(Color color, IconData icon, String label) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Icon(icon, color: color),
-      Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: color,
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-const color = Color.fromRGBO(0, 225, 255, 1);
-
-Widget buttonSection = Row(
+Widget textInputSection = Column(
   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
   children: [
-    _buildButtonColumn(color, Icons.call, 'CALL'),
-    _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-    _buildButtonColumn(color, Icons.share, 'SHARE'),
+    textInputColumn(false, Icons.email, 'Please Enter Here', 'Email:', true),
+    textInputColumn(
+        true, Icons.password, 'Please Password Here', 'Password:', false),
   ],
 );
 
-Widget textSection = Container(
-  padding: const EdgeInsets.all(8),
-  color: const Color.fromARGB(255, 66, 3, 241),
-  child: const Text(
-    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-    'Alps. Situated 1,578 meters above sea level, it is one of the '
-    'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-    'half-hour walk through pastures and pine forest, leads you to the '
-    'lake, which warms to 20 degrees Celsius in the summer. Activities '
-    'enjoyed here include rowing, and riding the summer toboggan run.',
-    softWrap: true,
-    style: TextStyle(
-      color: Color(0xffffffff)
+Widget textInputColumn(
+  bool obscureText,
+  IconData iconValue,
+  String hintTextValue,
+  String label,
+  bool isImage,
+) {
+  return Container(
+    padding: const EdgeInsets.all(10),
+    child: Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            keyboardAppearance: Brightness.dark,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              icon: Icon(iconValue),
+              hintText: hintTextValue,
+              labelText: label,
+              iconColor: Colors.amber,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 30,
+          height: 30,
+          child: Image.asset(
+            isImage ? 'images/eyeOpened.png' : 'images/eyeClosed.png',
+            fit: BoxFit.cover,
+          ),
+        ),
+      ],
     ),
+  );
+}
+
+Widget saveButtonSection = Container(
+  padding: const EdgeInsets.all(10),
+  alignment: Alignment.center,
+  child: TextButton(
+    style: TextButton.styleFrom(
+      foregroundColor: Colors.white,
+      padding: const EdgeInsets.all(16),
+      textStyle: const TextStyle(fontSize: 20),
+      backgroundColor: Colors.amber,
+    ),
+    child: const Text('Log in'),
+    onPressed: () {},
   ),
 );
