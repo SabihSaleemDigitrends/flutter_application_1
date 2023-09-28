@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Login.dart';
+import 'package:flutter_application_1/Signup.dart';
+import 'package:flutter_application_1/Splash.dart';
+import 'package:flutter_application_1/OnBoarding.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,19 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter layout demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter layout demo'),
-        ),
-        body: Column(
-          children: [
-            titleSection, // Add the titleSection widget here
-            buttonSection,
-            textSection
-          ],
-        ),
-      ),
+      routes: {
+        '/splash': (context) => const Splash(),
+        '/onBoarding': (context) => const OnBoarding(),
+        '/login': (context) => const Login(),
+        '/signup': (context) => const SignUp(),
+      },
+      initialRoute: '/splash',
+      debugShowCheckedModeBanner: false,
     );
   }
 }
