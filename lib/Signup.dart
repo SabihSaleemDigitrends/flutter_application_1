@@ -1,117 +1,176 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/Round_Button.dart';
+import 'package:flutter_application_1/components/Checkbox_Round.dart';
 import 'package:flutter_application_1/components/Text_input_section.dart';
+import 'package:flutter_application_1/components/Text_Gradient_Button.dart';
 
 void main() => runApp(const SignUp());
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('SignUp'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: Colors.grey[800],
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(8.0),
-          color: Colors.grey[900],
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('images/Pattern.png'),
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter),
+            ),
             child: Column(
               children: [
                 const SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
-                CircleAvatar(
-                  backgroundImage: const AssetImage('images/avatar.png'),
-                  radius: 100,
-                  backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-                  foregroundColor: Colors.grey[500],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                textInputSection(
-                  "Enter Your Name",
-                  "Name:",
-                  false,
-                  GlobalKey(debugLabel: 'name'),
+                Center(
+                  child: Image.asset(
+                    'images/Logo.png',
+                    width: 175,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
-                textInputSection(
-                  "Enter Your Email",
-                  "Email:",
-                  false,
-                  GlobalKey(debugLabel: 'email'),
+                const Text('Sign Up For Free',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  decoration: const BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      color: Colors.white,
+                      blurRadius: 1.0,
+                      offset: Offset(
+                        1.0,
+                        5.0,
+                      ),
+                    )
+                  ]),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      textInputSection("Enter Your Name", "Name:", false,
+                          GlobalKey(debugLabel: 'name'), context),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      textInputSection("Enter Your Email", "Email:", false,
+                          GlobalKey(debugLabel: 'email'), context),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      textInputSection("Enter Your Address", "Address:", false,
+                          GlobalKey(debugLabel: 'address'), context),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      textInputSection("Enter Your Phone No", "Phone No:",
+                          false, GlobalKey(debugLabel: 'phone'), context),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      textInputSection("Enter Your Password", "Password:",
+                          false, GlobalKey(debugLabel: 'password'), context),
+                    ],
+                  ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
-                textInputSection(
-                  "Enter Your Address",
-                  "Address:",
-                  false,
-                  GlobalKey(debugLabel: 'address'),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                textInputSection(
-                  "Enter Your Phone No",
-                  "Phone No:",
-                  false,
-                  GlobalKey(debugLabel: 'phone'),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                textInputSection(
-                  "Enter Your Password",
-                  "Password:",
-                  false,
-                  GlobalKey(debugLabel: 'password'),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: checkboxRound(isChecked, () {
+                        setState(() {
+                          isChecked = !isChecked;
+                        });
+                      }),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    const Text("Keep Me Signed In",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ))
+                  ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: checkboxRound(isChecked, () {
+                        setState(() {
+                          isChecked = !isChecked;
+                        });
+                      }),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    const Text("Email Me About Special Pricing",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 Center(
                   child: Column(
                     children: [
                       roundButton(
-                          "Signup",
-                          GlobalKey(debugLabel: 'signup'),
-                          () {},
-                          const LinearGradient(
-                            colors: <Color>[
-                              Color.fromARGB(255, 85, 86, 87),
-                              Color.fromARGB(255, 122, 123, 123),
-                              Color.fromARGB(255, 150, 151, 151),
-                            ],
-                          ),const EdgeInsets.symmetric(horizontal: 40.0)),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      roundButton("Login", GlobalKey(debugLabel: 'login'), () {
-                        Navigator.pushNamed(context, "/login");
+                          "Create Account", GlobalKey(debugLabel: 'signup'),
+                          () {
+                        Navigator.pushNamed(context, "/signup_process");
                       },
                           const LinearGradient(
                             colors: <Color>[
-                              Color.fromARGB(255, 85, 86, 87),
-                              Color.fromARGB(255, 122, 123, 123),
-                              Color.fromARGB(255, 150, 151, 151),
+                              Color.fromARGB(255, 83, 232, 140),
+                              Color.fromARGB(255, 21, 207, 120),
+                              Color.fromARGB(255, 47, 225, 151),
                             ],
-                          ),const EdgeInsets.symmetric(horizontal: 40.0))
+                          ),
+                          const EdgeInsets.symmetric(horizontal: 25.0)),
+                      textGradientButton("already have an account?",
+                          GlobalKey(debugLabel: 'login'), () {
+                        Navigator.pushNamed(context, "/login");
+                      }),
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),

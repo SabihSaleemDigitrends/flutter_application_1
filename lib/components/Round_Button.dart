@@ -19,7 +19,7 @@ Widget roundButton(
             foregroundColor: Colors.white,
             padding: buttonPadding,
             textStyle:
-                const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
           onPressed: onPressed,
           child: Text(buttonText),
