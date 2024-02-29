@@ -35,15 +35,15 @@ Widget textInputSection(String labelText, String title, bool obscureText,
             borderRadius: BorderRadius.circular(15), // Add border radius here
           ),
         ),
-        validator: (String? value) {
-          if (labelText == "Email") {
+        validator: (value) {
+          if (title == "Email:") {
             if (value == null || value.isEmpty) {
               return "Please enter your email";
             } else if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
                 .hasMatch(value)) {
               return "Invalid email address";
             }
-          } else if (labelText == "Password") {
+          } else if (title == "Password:") {
             if (value == null || value.isEmpty) {
               return "Please enter your password";
             } else if (value.length < 6) {

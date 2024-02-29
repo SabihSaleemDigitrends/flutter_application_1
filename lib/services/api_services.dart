@@ -5,28 +5,26 @@ import 'package:http/http.dart' as http;
 class ApiServices {
   final String baseUrl;
 
-  ApiServices({required this.baseUrl});
+  ApiServices({this.baseUrl = 'https://dummyjson.com/'});
 
-  Future<dynamic> get(String endpoint) async {
+  Future<dynamic> getData(String endpoint) async {
     final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
     return _handleResponse(response);
   }
 
-  Future<dynamic> post(String endpoint, Map<String, dynamic> data) async {
+  Future<dynamic> postData(String endpoint, Map<dynamic, dynamic> data) async {
     final response = await http.post(Uri.parse('$baseUrl/$endpoint'),
-        body: jsonEncode(data),
-        headers: {'Content-Type': 'application/json'});
+        body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
     return _handleResponse(response);
   }
 
-  Future<dynamic> put(String endpoint, Map<String, dynamic> data) async {
+  Future<dynamic> putData(String endpoint, Map<dynamic, dynamic> data) async {
     final response = await http.put(Uri.parse('$baseUrl/$endpoint'),
-        body: jsonEncode(data),
-        headers: {'Content-Type': 'application/json'});
+        body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
     return _handleResponse(response);
   }
 
-  Future<dynamic> delete(String endpoint) async {
+  Future<dynamic> deleteData(String endpoint) async {
     final response = await http.delete(Uri.parse('$baseUrl/$endpoint'));
     return _handleResponse(response);
   }
@@ -35,7 +33,8 @@ class ApiServices {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to load data. Status code: ${response.statusCode}');
+      throw Exception(
+          'Failed to load data. Status code: ${response.statusCode}');
     }
   }
 }

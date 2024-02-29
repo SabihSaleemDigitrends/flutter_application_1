@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           '/upload_preview': (context) => const UploadPreview(),
           '/test': (context) => const Test(),
         },
-        initialRoute: '/test',
+        initialRoute: '/splash',
         debugShowCheckedModeBanner: false,
       ),
     );
